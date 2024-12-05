@@ -1,0 +1,35 @@
+{
+	"$schema": "https://json.schemastore.org/package.json",
+	"name": "@astropub/code",
+	"description": "A lightweight Astro component for syntax highlighting and rendering beautifully formatted code blocks.",
+	"version": "0.1.0",
+	"type": "module",
+	"license": "MIT-0",
+	"exports": {
+		".": "./code.astro"
+	},
+	"files": [
+		"code.astro",
+		"scripts"
+	],
+	"devDependencies": {
+		"astro": "^5.0.3"
+	},
+	"keywords": [
+		"astro",
+		"astro-component",
+		"code-highlighting",
+		"syntax-highlighting",
+		"prism",
+		"prismjs",
+		"code-block",
+		"web-development",
+		"frontend",
+		"javascript",
+		"typescript",
+		"html",
+		"css",
+		"markdown",
+		"developer-tools"
+	]
+}

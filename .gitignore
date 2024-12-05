@@ -1,0 +1,9 @@
+# build output
+package-lock.json
+*.lock
+
+# dependencies
+node_modules/
+
+# macOS-specific files
+.DS_Store

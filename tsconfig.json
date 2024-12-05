@@ -1,0 +1,31 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		/* Type Checking */
+		"strict": true,
+		/* Emit */
+		"incremental": false,
+		"noEmit": true,
+		"declaration": true,
+		/* JavaScript Support */
+		"allowJs": true,
+		/* Interop */
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		/* Language and Environment */
+		"moduleDetection": "force",
+		"target": "ESNext",
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		/* Completeness */
+		"skipLibCheck": true,
+		/* Modules */
+		"allowArbitraryExtensions": true,
+		"allowImportingTsExtensions": true,
+		"module": "Preserve",
+		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
+		"esModuleInterop": true
+	},
+	"exclude": ["**/node_modules"]
+}

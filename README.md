@@ -59,12 +59,12 @@ import Code from "@astropub/code"
 
 Out of the box, Astro Code supports these languages via Prism.js:
 
-| Language   |            Type Value |
-|:---------- | ---------------------:|
-| Scripting  | `js` `jsx` `ts` `tsx` |
-| Content    |    `html` `svg` `xml` |
-| Styling    |                 `css` |
-| Shell      |                  `sh` |
+| Language   |                Type Value |
+|:---------- | -------------------------:|
+| Scripting  |     `js` `jsx` `ts` `tsx` |
+| Content    | `html` `json` `svg` `xml` |
+| Styling    |                     `css` |
+| Shell      |                      `sh` |
 
 ## API Reference
 

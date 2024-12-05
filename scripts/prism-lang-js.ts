@@ -1,6 +1,6 @@
-import { Prism } from "./prism.js"
+import { Prism } from "./prism.ts"
 
-import "./prism-lang-clike.js"
+import "./prism-lang-clike.ts"
 
 Prism.languages.javascript = Prism.languages.extend('clike', {
 	'class-name': [

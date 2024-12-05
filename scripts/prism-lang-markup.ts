@@ -1,4 +1,4 @@
-import { Prism } from "./prism.js"
+import { Prism } from "./prism.ts"
 
 Prism.languages.markup = {
 	'comment': {
@@ -96,14 +96,16 @@ Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
 	 *
 	 * An example of an inlined language is CSS with `<style>` tags.
 	 *
-	 * @param {string} tagName The name of the tag that contains the inlined language. This name will be treated as
-	 * case insensitive.
-	 * @param {string} lang The language key.
 	 * @example
 	 * addInlined('style', 'css');
 	 */
-	value(tagName, lang) {
-		const includedCdataInside = {};
+	value(
+		/** The name of the tag that contains the inlined language. This name will be treated as case insensitive. */
+		tagName: string,
+		/** The language key. */
+		lang: string
+	) {
+		const includedCdataInside: Record<string, any> = {};
 
 		includedCdataInside[`language-${lang}`] = {
 			pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
@@ -113,7 +115,7 @@ Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
 
 		includedCdataInside.cdata = /^<!\[CDATA\[|\]\]>$/i;
 
-		const inside = {
+		const inside: Record<string, any> = {
 			'included-cdata': {
 				pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
 				inside: includedCdataInside
@@ -125,7 +127,7 @@ Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
 			inside: Prism.languages[lang]
 		};
 
-		const def = {};
+		const def: Record<string, any> = {};
 
 		def[tagName] = {
 			pattern: RegExp(/(<__[^>]*>)(?:<!\[CDATA\[(?:[^\]]|\](?!\]>))*\]\]>|(?!<!\[CDATA\[)[\s\S])*?(?=<\/__>)/.source.replace(/__/g, () => tagName), 'i'),
@@ -144,13 +146,15 @@ Object.defineProperty(Prism.languages.markup.tag, 'addAttribute', {
 	 *
 	 * An example of an inlined language is CSS with `style` attributes.
 	 *
-	 * @param {string} attrName The name of the tag that contains the inlined language. This name will be treated as
-	 * case insensitive.
-	 * @param {string} lang The language key.
 	 * @example
 	 * addAttribute('style', 'css');
 	 */
-	value(attrName, lang) {
+	value(
+		/** The name of the tag that contains the inlined language. This name will be treated as case insensitive. */
+		attrName: string,
+		/** The language key. */
+		lang: string
+	) {
 		Prism.languages.markup.tag.inside['special-attr'].push({
 			pattern: RegExp(
 				`${/(^|["'\s])/.source}(?:${attrName})${/\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))/.source}`,

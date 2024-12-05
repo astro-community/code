@@ -1,4 +1,4 @@
-import { Prism } from "./prism.js"
+import { Prism } from "./prism.ts"
 
 // $ set | grep '^[A-Z][^[:space:]]*=' | cut -d= -f1 | tr '\n' '|'
 // + LC_ALL, RANDOM, REPLY, SECONDS.
@@ -227,7 +227,7 @@ const toBeCopied = [
 	'number'
 ];
 
-const inside = insideString.variable[1].inside;
+const inside = (insideString.variable[1] as any).inside;
 
 for (let i = 0; i < toBeCopied.length; ++i) {
 	inside[toBeCopied[i]] = Prism.languages.bash[toBeCopied[i]];

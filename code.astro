@@ -1,12 +1,9 @@
 ---
-import type { HTMLAttributes } from "astro/types"
-import type { SupportedLang } from "./scripts/types.ts"
+import type { Code } from "./types.ts"
 
-interface Props extends HTMLAttributes<"code"> {
-	code: string | string[]
-	lang: SupportedLang
-	label?: string
-}
+export type { Code }
+
+export interface Props extends Code.Attributes {}
 
 const { code, lang, ...props } = Astro.props
 
@@ -15,22 +12,22 @@ const formattedCode = Array.isArray(code) ? code.join("\n") : code
 
 <code data-lang={lang} {...props}>{formattedCode}</code>
 <script>
-	import type { SupportedLang } from "./scripts/types.ts"
+	import type { Code } from "./types.ts"
 
-	import { highlight } from "./scripts/highlight.js"
-	import { Prism } from "./scripts/prism.js"
+	import { highlight } from "./scripts/highlight.ts"
+	import { Prism } from "./scripts/prism.ts"
 
-	import "./scripts/prism-lang-css.js"
-	import "./scripts/prism-lang-html.js"
-	import "./scripts/prism-lang-js.js"
-	import "./scripts/prism-lang-jsx.js"
-	import "./scripts/prism-lang-sh.js"
-	import "./scripts/prism-lang-svg.js"
-	import "./scripts/prism-lang-tsx.js"
-	import "./scripts/prism-lang-xml.js"
+	import "./scripts/prism-lang-css.ts"
+	import "./scripts/prism-lang-html.ts"
+	import "./scripts/prism-lang-js.ts"
+	import "./scripts/prism-lang-jsx.ts"
+	import "./scripts/prism-lang-sh.ts"
+	import "./scripts/prism-lang-svg.ts"
+	import "./scripts/prism-lang-tsx.ts"
+	import "./scripts/prism-lang-xml.ts"
 
 	for (const $code of document.querySelectorAll<HTMLElement>("[data-lang]")) {
-		const lang = $code.dataset.lang! as SupportedLang
+		const lang = $code.dataset.lang! as Code.Language
 		const text = $code.firstChild! as Text
 
 		const language = Prism.languages[lang]

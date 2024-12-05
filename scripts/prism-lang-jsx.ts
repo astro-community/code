@@ -1,7 +1,7 @@
-import { Prism } from "./prism.js"
+import { Prism, type Token } from "./prism.ts"
 
-import "./prism-lang-markup.js"
-import "./prism-lang-js.js"
+import "./prism-lang-markup.ts"
+import "./prism-lang-js.ts"
 
 const javascript = Prism.util.clone(Prism.languages.javascript);
 
@@ -9,11 +9,7 @@ const space = /(?:\s|\/\/.*(?!.)|\/\*(?:[^*]|\*(?!\/))\*\/)/.source;
 const braces = /(?:\{(?:\{(?:\{[^{}]*\}|[^{}])*\}|[^{}])*\})/.source;
 let spread = /(?:\{<S>*\.{3}(?:[^{}]|<BRACES>)*\})/.source;
 
-/**
- * @param {string} source
- * @param {string} [flags]
- */
-const re = (source, flags) => RegExp(
+const re = (source: string, flags = '') => RegExp(
 	source
 		.replace(/<S>/g, () => space)
 		.replace(/<BRACES>/g, () => braces)
@@ -56,20 +52,23 @@ Prism.languages.insertBefore('inside', 'special-attr', {
 }, Prism.languages.jsx.tag);
 
 // The following will handle plain text inside tags
-const stringifyToken = (token) => {
+const stringifyToken = (token: Token): string => {
 	if (!token) {
 		return '';
 	}
+
 	if (typeof token === 'string') {
 		return token;
 	}
+
 	if (typeof token.content === 'string') {
 		return token.content;
 	}
-	return token.content.map(stringifyToken).join('');
+
+	return (token.content as Token[]).map(stringifyToken).join('');
 };
 
-const walkTokens = (tokens) => {
+const walkTokens = (tokens: Token[]) => {
 	const openedTags = [];
 
 	for (let i = 0; i < tokens.length; ++i) {
@@ -78,22 +77,22 @@ const walkTokens = (tokens) => {
 		let notTagNorBrace = false;
 
 		if (typeof token !== 'string') {
-			if (token.type === 'tag' && token.content[0] && token.content[0].type === 'tag') {
+			if (token.type === 'tag' && token.content[0] && (token.content as Token[])[0].type === 'tag') {
 				// We found a tag, now find its kind
 
-				if (token.content[0].content[0].content === '</') {
+				if (((token.content as Token[])[0].content as Token[])[0].content === '</') {
 					// Closing tag
-					if (openedTags.length > 0 && openedTags[openedTags.length - 1].tagName === stringifyToken(token.content[0].content[1])) {
+					if (openedTags.length > 0 && openedTags[openedTags.length - 1].tagName === stringifyToken(((token.content as Token[])[0].content as Token[])[1])) {
 						// Pop matching opening tag
 						openedTags.pop();
 					}
 				} else {
-					if (token.content[token.content.length - 1].content === '/>') {
+					if ((token.content as Token[])[token.content.length - 1].content === '/>') {
 						// Autoclosed tag, ignore
 					} else {
 						// Opening tag
 						openedTags.push({
-							tagName: stringifyToken(token.content[0].content[1]),
+							tagName: stringifyToken(((token.content as Token[])[0].content as Token[])[1]),
 							openedBraces: 0
 						});
 					}
@@ -129,12 +128,12 @@ const walkTokens = (tokens) => {
 					--i;
 				}
 
-				tokens[i] = new Prism.Token('plain-text', plainText, null, plainText);
+				tokens[i] = new Prism.Token('plain-text', plainText, undefined, plainText);
 			}
 		}
 
 		if (token.content && typeof token.content !== 'string') {
-			walkTokens(token.content);
+			walkTokens(token.content as Token[]);
 		}
 	}
 };

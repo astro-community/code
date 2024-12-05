@@ -1,4 +1,4 @@
-import { Prism } from "./prism.js"
+import { Prism } from "./prism.ts"
 
 const string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
 

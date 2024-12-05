@@ -1,4 +1,4 @@
-import { Prism } from "./prism.js"
+import { Prism } from "./prism.ts"
 
 Prism.languages.clike = {
 	'comment': [

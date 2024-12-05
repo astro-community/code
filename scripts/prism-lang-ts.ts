@@ -1,6 +1,6 @@
-import { Prism } from "./prism.js"
+import { Prism, type GrammarToken } from "./prism.ts"
 
-import "./prism-lang-js.js"
+import "./prism-lang-js.ts"
 
 Prism.languages.typescript = Prism.languages.extend('javascript', {
 	'class-name': {
@@ -8,7 +8,7 @@ Prism.languages.typescript = Prism.languages.extend('javascript', {
 		lookbehind: true,
 		greedy: true,
 		inside: null // see below
-	},
+	} as any as GrammarToken,
 	'builtin': /\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/,
 });
 

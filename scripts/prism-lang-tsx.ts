@@ -19,22 +19,22 @@ const re = (source: string, flags = '') => RegExp(
 
 spread = re(spread).source;
 
-Prism.languages.jsx = Prism.languages.extend('markup', typescript);
-Prism.languages.jsx.tag.pattern = re(
+Prism.languages.tsx = Prism.languages.extend('markup', typescript);
+Prism.languages.tsx.tag.pattern = re(
 	/<\/?(?:[\w.:-]+(?:<S>+(?:[\w.:$-]+(?:=(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s{'"/>=]+|<BRACES>))?|<SPREAD>))*<S>*\/?)?>/.source
 );
 
-Prism.languages.jsx.tag.inside.tag.pattern = /^<\/?[^\s>\/]*/;
-Prism.languages.jsx.tag.inside['attr-value'].pattern = /=(?!\{)(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s'">]+)/;
-Prism.languages.jsx.tag.inside.tag.inside['class-name'] = /^[A-Z]\w*(?:\.[A-Z]\w*)*$/;
-Prism.languages.jsx.tag.inside.comment = typescript.comment;
+Prism.languages.tsx.tag.inside.tag.pattern = /^<\/?[^\s>\/]*/;
+Prism.languages.tsx.tag.inside['attr-value'].pattern = /=(?!\{)(?:"(?:\\[\s\S]|[^\\"])*"|'(?:\\[\s\S]|[^\\'])*'|[^\s'">]+)/;
+Prism.languages.tsx.tag.inside.tag.inside['class-name'] = /^[A-Z]\w*(?:\.[A-Z]\w*)*$/;
+Prism.languages.tsx.tag.inside.comment = typescript.comment;
 
 Prism.languages.insertBefore('inside', 'attr-name', {
 	'spread': {
 		pattern: re(/<SPREAD>/.source),
-		inside: Prism.languages.jsx
+		inside: Prism.languages.tsx
 	}
-}, Prism.languages.jsx.tag);
+}, Prism.languages.tsx.tag);
 
 Prism.languages.insertBefore('inside', 'special-attr', {
 	'script': {
@@ -46,10 +46,10 @@ Prism.languages.insertBefore('inside', 'special-attr', {
 				pattern: /^=(?=\{)/,
 				alias: 'punctuation'
 			},
-			rest: Prism.languages.jsx
+			rest: Prism.languages.tsx
 		},
 	}
-}, Prism.languages.jsx.tag);
+}, Prism.languages.tsx.tag);
 
 // The following will handle plain text inside tags
 const stringifyToken = (token: Token): string => {
@@ -99,21 +99,22 @@ const walkTokens = (tokens: Token[]) => {
 				}
 			} else if (openedTags.length > 0 && token.type === 'punctuation' && token.content === '{') {
 
-				// Here we might have entered a JSX context inside a tag
+				// Here we might have entered a TSX context inside a tag
 				++openedTags[openedTags.length - 1].openedBraces;
 
 			} else if (openedTags.length > 0 && openedTags[openedTags.length - 1].openedBraces > 0 && token.type === 'punctuation' && token.content === '}') {
 
-				// Here we might have left a JSX context inside a tag
+				// Here we might have left a TSX context inside a tag
 				--openedTags[openedTags.length - 1].openedBraces;
 
 			} else {
 				notTagNorBrace = true;
 			}
 		}
+
 		if (notTagNorBrace || typeof token === 'string') {
 			if (openedTags.length > 0 && openedTags[openedTags.length - 1].openedBraces === 0) {
-				// Here we are inside a tag, and not inside a JSX context.
+				// Here we are inside a tag, and not inside a TSX context.
 				// That's plain text: drop any tokens matched.
 				let plainText = stringifyToken(token);
 
@@ -139,7 +140,7 @@ const walkTokens = (tokens: Token[]) => {
 };
 
 Prism.hooks.add('after-tokenize', (env) => {
-	if (env.language !== 'jsx') {
+	if (env.language !== 'tsx') {
 		return;
 	}
 

@@ -14,31 +14,12 @@ const formattedCode = Array.isArray(code) ? code.join("\n") : code
 <script>
 	import type { Code } from "./types.ts"
 
-	import { highlight } from "./scripts/highlight.ts"
-	import { Prism } from "./scripts/prism.ts"
-
-	import "./scripts/prism-lang-css.ts"
-	import "./scripts/prism-lang-css-extras.ts"
-	import "./scripts/prism-lang-html.ts"
-	import "./scripts/prism-lang-js.ts"
-	import "./scripts/prism-lang-js-extras.ts"
-	import "./scripts/prism-lang-json.ts"
-	import "./scripts/prism-lang-jsx.ts"
-	import "./scripts/prism-lang-sh.ts"
-	import "./scripts/prism-lang-svg.ts"
-	import "./scripts/prism-lang-tsx.ts"
-	import "./scripts/prism-lang-xml.ts"
+	import { highlightTextNode } from "./scripts/highlight.ts"
 
 	for (const $code of document.querySelectorAll<HTMLElement>("[data-lang]")) {
 		const lang = $code.dataset.lang! as Code.Language
 		const text = $code.firstChild! as Text
 
-		const language = Prism.languages[lang]
-
-		if (language) {
-			const tokens = Prism.tokenize(text.data, language)
-
-			highlight(text, tokens, "source", 0)
-		}
+		highlightTextNode(text, lang)
 	}
 </script>

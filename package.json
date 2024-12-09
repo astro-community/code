@@ -2,12 +2,22 @@
 	"$schema": "https://json.schemastore.org/package.json",
 	"name": "@astropub/code",
 	"description": "A lightweight Astro component for syntax highlighting and rendering beautifully formatted code blocks.",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"type": "module",
 	"license": "MIT-0",
 	"exports": {
 		".": "./code.astro",
+		"./highlight": "./scripts/highlight.ts",
 		"./prism": "./scripts/prism.ts",
+		"./prism/lang/css": "./scripts/prism-lang-css-extras.ts",
+		"./prism/lang/html": "./scripts/prism-lang-html.ts",
+		"./prism/lang/js": "./scripts/prism-lang-js-extras.ts",
+		"./prism/lang/json": "./scripts/prism-lang-json.ts",
+		"./prism/lang/sh": "./scripts/prism-lang-sh.ts",
+		"./prism/lang/svg": "./scripts/prism-lang-svg.ts",
+		"./prism/lang/ts": "./scripts/prism-lang-ts.ts",
+		"./prism/lang/tsx": "./scripts/prism-lang-tsx.ts",
+		"./prism/lang/xml": "./scripts/prism-lang-xml.ts",
 		"./types": "./types.ts"
 	},
 	"files": [

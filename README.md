@@ -73,6 +73,28 @@ Out of the box, Astro Code supports these languages via Prism.js:
 | `code`     | `string` `string[]` | Code to render.           |
 | `lang`     | `string`            | Language of highlighting. |
 
+## Utility Usage
+
+The `highlightText` method can be used to highlight a given plain text string with a language.
+
+```ts
+import { highlightText } from "@astropub/code/highlight"
+
+export const usage = () => {
+  highlightText("const a = true", "js)
+}
+```
+
+The `highlightTextNode` method can be used to highlight a Text node with a language.
+
+```ts
+import { highlightTextNode } from "@astropub/code/highlight"
+
+export const usage = (node: Text) => {
+  highlightText(node, "js)
+}
+```
+
 ## License
 
 Licensed under the [MIT-0 License](https://opensource.org/license/mit-0).

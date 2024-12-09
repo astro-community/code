@@ -1,16 +1,16 @@
 import { Prism, type TokenStream } from "./prism.ts"
 
-import "./scripts/prism-lang-css.ts"
-import "./scripts/prism-lang-css-extras.ts"
-import "./scripts/prism-lang-html.ts"
-import "./scripts/prism-lang-js.ts"
-import "./scripts/prism-lang-js-extras.ts"
-import "./scripts/prism-lang-json.ts"
-import "./scripts/prism-lang-jsx.ts"
-import "./scripts/prism-lang-sh.ts"
-import "./scripts/prism-lang-svg.ts"
-import "./scripts/prism-lang-tsx.ts"
-import "./scripts/prism-lang-xml.ts"
+import "./prism-lang-css.ts"
+import "./prism-lang-css-extras.ts"
+import "./prism-lang-html.ts"
+import "./prism-lang-js.ts"
+import "./prism-lang-js-extras.ts"
+import "./prism-lang-json.ts"
+import "./prism-lang-jsx.ts"
+import "./prism-lang-sh.ts"
+import "./prism-lang-svg.ts"
+import "./prism-lang-tsx.ts"
+import "./prism-lang-xml.ts"
 
 /** Highlights the given plain text string using the given language. */
 export const highlightText = (

@@ -45,7 +45,7 @@ export const highlightTextNode = (
 	}
 }
 
-export const _highlightTextNode = (node: Text, tokens: TokenStream, type: string, index = 0, highlights = new Map) => {
+const _highlightTextNode = (node: Text, tokens: TokenStream, type: string, index = 0, highlights = new Map) => {
 	for (const token of tokens) {
 		if (typeof token === "string") {
 			const range = new StaticRange({

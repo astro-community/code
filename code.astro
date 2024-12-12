@@ -10,8 +10,7 @@ const { code, lang, ...props } = Astro.props
 const formattedCode = Array.isArray(code) ? code.join("\n") : code
 ---
 
-<code data-lang={lang} {...props}>{formattedCode}</code>
-<script>
+<code data-lang={lang} {...props}>{formattedCode}</code><script>
 	import type { Code } from "./types.ts"
 
 	import { highlightTextNode } from "./scripts/highlight.ts"
